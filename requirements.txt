@@ -1,0 +1,11 @@
+unicorn
+beautifulsoup4
+fastapi
+nltk
+numpy
+requests
+trafilatura
+spacy
+-f https://download.pytorch.org/whl/cpu/torch_stable.html
+torch==1.10.0+cpu
+

@@ -6,7 +6,7 @@ numpy
 requests
 trafilatura
 spacy
-./en_core_web_sm-2.2.5.tar.gz
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl
 -f https://download.pytorch.org/whl/cpu/torch_stable.html
 torch==1.10.0+cpu
 

@@ -1,8 +1,9 @@
 import requests
-import spacy
-from spacy.lang.en.stop_words import STOP_WORDS
-from string import punctuation
-from heapq import nlargest
+import nltk
+from sumy.summarizers.kl import KLSummarizer
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.parsers.plaintext import PlaintextParser
+
 import trafilatura
 import asyncio
 
@@ -82,7 +83,7 @@ def summarizer(text):
 
     # making summary a single string
     final_summary = [word.text for word in summary]
-    summary = ''.join(final_summary)
+    summary = '\n'.join(final_summary)
 
     return summary
 
@@ -140,7 +141,7 @@ def search(sentence):
     # summary = getSummary(url)  
     # return { 'response' : 'answer: '+   str(url) }
     url = result[0][0]
-    summary = getSummary(url)  
+    summary = getSummary(url)
     return { 'response' : summary+'\n\n Link:'+url }
 
 

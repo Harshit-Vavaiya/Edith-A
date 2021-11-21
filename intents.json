@@ -12,7 +12,7 @@
       ],
       "responses": [
         "Hey :-)",
-        "Hello, thanks for visiting",
+        "Hello!",
         "Hi there, what can I do for you?",
         "Hi there, how can I help?"
       ]
@@ -21,7 +21,8 @@
       "tag": "goodbye",
       "patterns": ["Bye", "See you later", "Goodbye"],
       "responses": [
-        "See you later, thanks for visiting",
+        "See you later!",
+        "See you soon!",
         "Have a nice day",
         "Bye! Come back again soon."
       ]
@@ -100,7 +101,9 @@
       "patterns": [
         "explain",
         "How to",
-        "what is"
+        "what is",
+        "how"
+
       ],
       "responses": [
         ""

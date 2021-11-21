@@ -3,7 +3,7 @@ beautifulsoup4
 fastapi
 nltk
 numpy
-sumi
+sumy
 requests
 trafilatura
 spacy

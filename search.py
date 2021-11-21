@@ -1,11 +1,13 @@
 import requests
-import nltk
+
+
+
 from sumy.summarizers.kl import KLSummarizer
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
 
 import trafilatura
-import asyncio
+
 
 
 
@@ -21,70 +23,16 @@ def getSummary(url):
 
 
 def summarizer(text):
+    parser =    PlaintextParser.from_string(text,Tokenizer('english'))
+    kl_summarizer=KLSummarizer()
+    kl_summary=kl_summarizer(parser.document,sentences_count=5)
+
+    # get summary
+    summary = ""
+
+    for sentence in kl_summary:
+        summary += str(sentence) + "\n"
     
-    # list of stopwords
-    stopwords = list(STOP_WORDS)
-
-    # loading textmodel from spacy
-    nlp = spacy.load('en_core_web_sm')
-
-    # parsing the given text using model to 
-    # This preprocesses the text
-    # e.g. tokenizes words and sentences
-    doc = nlp(text)
-
-    # list of tokens
-    tokens = [token.text for token in doc]
-
-    # punctuations to avoid, new line is added to 
-    # existing punctuations
-    punctuation_ = str(punctuation)+'\n'
-    
-    # Count frequencies of word to find out importance
-    # of each word in the given article,
-    # this frequency will later help to score sentences
-    word_frequencies = {}
-    for word in doc:
-        if word.text.lower() not in stopwords:
-            if word.text.lower() not in punctuation_:
-                if word.text.lower() not in word_frequencies.keys():
-                    word_frequencies[word.text.lower()] = 1
-                else:
-                    word_frequencies[word.text.lower()] += 1
-
-    
-    # most frequent word's value. highest frequency
-    # this will help normalize frequency values
-    max_freq = max(word_frequencies.values())
-
-    # normalizing word frequency values
-    for word in word_frequencies.keys():
-        word_frequencies[word] = word_frequencies[word]/max_freq
-
-    # sentence tokens
-    sentence_tokens = [sent for sent in doc.sents]
-
-    # score each sentence based on frequency of words it contains.
-    sentence_scores = {}
-    for sent in sentence_tokens:
-        for word in sent:
-            if word.text.lower() in word_frequencies.keys():
-                if sent not in sentence_scores.keys():
-                    sentence_scores[sent] = word_frequencies[word.text.lower()]
-                else:
-                    sentence_scores[sent] += word_frequencies[word.text.lower()]
-
-    # number of sentences to select
-    # here we are selecting 30% of actual content
-    selected_length = int(len(sentence_tokens)*0.3)
-
-    # making summary with 'n' highest scored sentences.
-    summary = nlargest(selected_length,sentence_scores,key = sentence_scores.get)
-
-    # making summary a single string
-    final_summary = [word.text for word in summary]
-    summary = '\n'.join(final_summary)
-
     return summary
 
 def summarize(text):
@@ -92,6 +40,7 @@ def summarize(text):
     # summarizing text using summarizer function  
     summary = summarizer(text)
     return summary
+
 
 def search(sentence):
   
